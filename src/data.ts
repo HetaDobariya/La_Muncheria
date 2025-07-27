@@ -356,6 +356,7 @@ export const singleProduct: Product = {
 };
 
 
+//menupage
 type Menu = {
   id: number;
   slug: string;

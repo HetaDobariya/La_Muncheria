@@ -8,5 +8,7 @@ services:
       POSTGRES_PASSWORD: mypassword
       POSTGRES_DB: mydb
     ports:
-      - 5432:5432
+      - 5433:5432
 
+# run this in any machine n it cn install everything you need 
+# create instance of postgres and run that on any machine using docker

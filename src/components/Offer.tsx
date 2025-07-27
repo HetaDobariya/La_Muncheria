@@ -1,26 +1,45 @@
+"use client"
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import React from "react";
-import CountDown from "./CountDown";
 
 const Offer = () => {
+  const router = useRouter();
+
   return (
-    <div className="bg-black h-screen flex flex-col md:flex-row md:justify-between md:bg-[url('/offerBg.png')] md:h-[70vh]">
+    <div className="bg-blue-50 w-full flex flex-col md:flex-row items-center justify-between px-6 md:px-20 py-10 rounded-lg shadow-sm overflow-hidden">
+
       {/* TEXT CONTAINER */}
-      <div className="flex-1 flex flex-col justify-center items-center text-center gap-8 p-6">
-        <h1 className="text-white text-5xl font-bold xl:text-6xl">Delicious Burger & French Fry</h1>
-        <p className="text-white xl:text-xl">
-          Progressively simplify effective e-toilers and process-centric methods
-          of empowerment. Quickly pontificate parallel.
+      <div className="w-full md:w-1/2 flex flex-col justify-center items-center md:items-start text-center md:text-left gap-6 z-10">
+        <h1 className="text-4xl md:text-5xl font-bold text-blue-600">Weekend Dosa Deal</h1>
+        <p className="text-gray-700 text-lg max-w-md">
+          Spice up your weekend with our crowd-favorite <strong>Mysore Masala</strong> or go bold with the <strong>Jini Roll</strong>.
+          Enjoy special discounts — this weekend only!
         </p>
-        {/* <CountDown/> */}
-        <button className="bg-red-500 text-white rounded-md py-3 px-6">Order Now</button>
+        <button
+          onClick={() => router.push("/menu/plain-dhosa")}
+          className="bg-blue-600 hover:bg-blue-700 transition text-white font-medium py-2 px-6 rounded-md shadow"
+        >
+          Order Now
+        </button>
       </div>
+
       {/* IMAGE CONTAINER */}
-      <div className="flex-1 w-full relative md:h-full">
-        <Image src="/offerProduct.png" alt="" fill className="object-contain" />
+      <div className="relative w-full md:w-1/2 h-64 md:h-[350px] mt-10 md:mt-0 rounded-lg overflow-hidden">
+        <Image
+          src="/offer.jpg"
+          alt="Dosa Offer"
+          fill
+          className="object-contain object-right"
+        />
+        <div className="absolute inset-0 bg-gradient-to-l from-white/70 via-transparent to-transparent" />
       </div>
+
     </div>
   );
 };
 
 export default Offer;
+
+
+//md:bg-[url('/offerBg.png')] md:h-[70vh] - for bg image

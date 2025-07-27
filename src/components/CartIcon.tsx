@@ -30,7 +30,7 @@ const CartIcon = () => {
           />
         </div>
         {session?.user.isAdmin ? (
-          <button className="p-1 bg-red-500 text-white rounded-md">Add product</button>
+          <button className="p-1 px-3 bg-blue-500 text-white rounded-md  whitespace-nowrap">Add product</button>
         ) : (
           <span>Cart ({totalItems})</span>
         )}
@@ -40,3 +40,5 @@ const CartIcon = () => {
 };
 
 export default CartIcon;
+
+//needs to be client component as the items val changes so created diff rather than making navbar use client

@@ -8,13 +8,13 @@ import { toast } from "react-toastify";
 const Price = ({ product }: { product: ProductType }) => {
   const [total, setTotal] = useState(product.price);
   const [quantity, setQuantity] = useState(1);
-  const [selected, setSelected] = useState(0);
+  const [selected, setSelected] = useState(0); //first item index 0-small
 
   const { addToCart } = useCartStore();
 
   useEffect(()=>{
     useCartStore.persist.rehydrate()
-  },[])
+  },[]) //for loading saved state from localStorage
 
   useEffect(() => {
     if (product.options?.length) {
@@ -23,6 +23,7 @@ const Price = ({ product }: { product: ProductType }) => {
       );
     }
   }, [quantity, selected, product]);
+  //when quantity n selected gets changed we'll set total ,options is optional(it cn not exist) so if exists..
 
   const handleCart = ()=>{
     addToCart({
@@ -32,22 +33,22 @@ const Price = ({ product }: { product: ProductType }) => {
       price: total,
       ...(product.options?.length && {
         optionTitle: product.options[selected].title,
-      }),
+      }), //conditional spread if product has option add
       quantity: quantity,
     })
-    toast.success("The product added to the cart!")
+    toast.success("Product added to the cart successfully!")
   }
 
   return (
     <div className="flex flex-col gap-4">
-      <h2 className="text-2xl font-bold">${total}</h2>
+      <h2 className="text-2xl font-bold">Rs.{total}</h2>
       {/* OPTIONS CONTAINER */}
       <div className="flex gap-4">
         {product.options?.length &&
           product.options?.map((option, index) => (
             <button
               key={option.title}
-              className="min-w-[6rem] p-2 ring-1 ring-red-400 rounded-md"
+              className="min-w-[6rem] p-2 ring-1 ring-blue-600 rounded-md"
               style={{
                 background: selected === index ? "rgb(248 113 113)" : "white",
                 color: selected === index ? "white" : "red",
@@ -60,8 +61,8 @@ const Price = ({ product }: { product: ProductType }) => {
       </div>
       {/* QUANTITY AND ADD BUTTON CONTAINER */}
       <div className="flex justify-between items-center">
-        {/* QUANTITY */}
-        <div className="flex justify-between w-full p-3 ring-1 ring-red-500">
+        {/* QUANTITY  w-full use complete div section*/}
+        <div className="flex justify-between w-full p-3 ring-1 ring-blue-600">
           <span>Quantity</span>
           <div className="flex gap-4 items-center">
             <button
@@ -79,7 +80,7 @@ const Price = ({ product }: { product: ProductType }) => {
         </div>
         {/* CART BUTTON */}
         <button
-          className="uppercase w-56 bg-red-500 text-white p-3 ring-1 ring-red-500"
+          className="uppercase w-56 bg-blue-600 text-white p-3 ring-1 ring-blue-600"
           onClick={handleCart}
         >
           Add to Cart
@@ -90,3 +91,7 @@ const Price = ({ product }: { product: ProductType }) => {
 };
 
 export default Price;
+
+
+
+//ic-items-center total.toFixed(2)-2 val after decimal

@@ -1,5 +1,6 @@
 "use client";
 
+import Loading from "@/components/Loading";
 import { OrderType } from "@/types/types";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
@@ -22,7 +23,7 @@ const OrdersPage = () => {
     queryFn: () =>
       fetch("http://localhost:3000/api/orders").then((res) => res.json()),
   });
-
+  //tanstack queries when orders update refresh list(status)
   const queryClient = useQueryClient();
 
   const mutation = useMutation({
@@ -44,17 +45,17 @@ const OrdersPage = () => {
     e.preventDefault();
     const form = e.target as HTMLFormElement;
     const input = form.elements[0] as HTMLInputElement;
-    const status = input.value;
+    const status = input.value; //input val
 
-    mutation.mutate({ id, status });
+    mutation.mutate({ id, status }); //push the changed val 
     toast.success("The order status has been changed!")
   };
 
-  if (isLoading || status === "loading") return "Loading...";
+  if (isLoading || status === "loading") return <Loading/>;
 
   return (
     <div className="p-4 lg:px-20 xl:px-40">
-      <table className="w-full border-separate border-spacing-3">
+      <table className="w-full border-separate border-spacing-3 text-blue-800">
         <thead>
           <tr className="text-left">
             <th className="hidden md:block">Order ID</th>
@@ -66,10 +67,10 @@ const OrdersPage = () => {
         </thead>
         <tbody>
           {data.map((item: OrderType) => (
-            <tr className={`${item.status !== "delivered" && "bg-red-50"}`} key={item.id}>
+            <tr className={`${item.status !== "delivered!" && "bg-red-50"}`} key={item.id}>
               <td className="hidden md:block py-6 px-1">{item.id}</td>
               <td className="py-6 px-1">
-                {item.createdAt.toString().slice(0, 10)}
+                {item.createdAt.toString().slice(0, 10)} 
               </td>
               <td className="py-6 px-1">{item.price}</td>
               <td className="hidden md:block py-6 px-1">
@@ -83,9 +84,9 @@ const OrdersPage = () => {
                   >
                     <input
                       placeholder={item.status}
-                      className="p-2 ring-1 ring-red-100 rounded-md"
+                      className="p-2 ring-1 ring-blue-100 rounded-md"
                     />
-                    <button className="bg-red-400 p-2 rounded-full">
+                    <button className="bg-blue-400 p-2 rounded-full">
                       <Image src="/edit.png" alt="" width={20} height={20} />
                     </button>
                   </form>
@@ -102,3 +103,5 @@ const OrdersPage = () => {
 };
 
 export default OrdersPage;
+//{item.createdAt.toString().slice(0, 10)}  date gives date +time so slice n use 1st 10 items date mnth yr
+//form.elements[0] form has 2 ele input n edit button so 1st ele[0]

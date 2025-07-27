@@ -19,18 +19,18 @@ const Featured = async () => {
   const featuredProducts:ProductType[] = await getData()
 
   return (
-    <div className="w-screen overflow-x-scroll text-red-500">
+    <div className="w-screen overflow-x-scroll text-blue-600 mt-2 md:mt-12">
       {/* WRAPPER */}
       <div className="w-max flex">
         {/* SINGLE ITEM */}
         {featuredProducts.map((item) => (
           <div
             key={item.id}
-            className="w-screen h-[60vh] flex flex-col items-center justify-around p-4 hover:bg-fuchsia-50 transition-all duration-300 md:w-[50vw] xl:w-[33vw] xl:h-[90vh]"
+            className="w-screen h-[60vh] flex flex-col items-center justify-around p-4 hover:bg-blue-100 transition-all duration-300 md:w-[50vw] xl:w-[33vw] xl:h-[90vh]"
           >
-            {/* IMAGE CONTAINER */}
+            {/* IMAGE CONTAINER if img exists as its optional rotate 60deg*/}
             {item.img && (
-              <div className="relative flex-1 w-full hover:rotate-[60deg] transition-all duration-500">
+             <div className="relative flex-1 w-full transition-all duration-500 hover:scale-105">
                 <Image src={item.img} alt="" fill className="object-contain" />
               </div>
             )}
@@ -38,10 +38,10 @@ const Featured = async () => {
             <div className=" flex-1 flex flex-col items-center justify-center text-center gap-4">
               <h1 className="text-xl font-bold uppercase xl:text-2xl 2xl:text-3xl">{item.title}</h1>
               <p className="p-4 2xl:p-8">{item.desc}</p>
-              <span className="text-xl font-bold">${item.price}</span>
-              <button className="bg-red-500 text-white p-2 rounded-md">
+              <span className="text-xl font-bold">Rs.{item.price}</span>
+              {/* <button className="bg-blue-600 text-white p-2 rounded-md">
                 Add to Cart
-              </button>
+              </button> */}
             </div>
           </div>
         ))}
@@ -51,3 +51,6 @@ const Featured = async () => {
 };
 
 export default Featured;
+
+//md:w-[50vw] xl:w-[33vw]  md:2 items then 3 
+//xl:h-[90vh] height

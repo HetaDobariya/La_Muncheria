@@ -3,6 +3,7 @@ import { NextAuthOptions, User, getServerSession } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import { prisma } from "./connect";
 
+ //nextauth user doesnt have isAdmin so to configure it
 declare module "next-auth" {
   interface Session {
     user: User & {
@@ -49,3 +50,6 @@ export const authOptions: NextAuthOptions = {
 };
 
 export const getAuthSession = () => getServerSession(authOptions);
+
+//if token - isAdmin
+//find in db if isAdmin

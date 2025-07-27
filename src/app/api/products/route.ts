@@ -6,6 +6,8 @@ export const GET = async (req: NextRequest) => {
   const { searchParams } = new URL(req.url);
   const cat = searchParams.get("cat");
 
+  //localost:3000/api/products?cat="pizzas" - use this cat to filter products
+
   try {
     const products = await prisma.product.findMany({
       where: {
@@ -24,6 +26,7 @@ export const GET = async (req: NextRequest) => {
 export const POST = async (req: NextRequest) => {
   try {
     const body = await req.json();
+    console.log("Received body:", body); // Add this line
     const product = await prisma.product.create({
       data: body,
     });
@@ -36,3 +39,6 @@ export const POST = async (req: NextRequest) => {
     );
   }
 };
+
+//if there is cat - fetch those prods else fetch featured prods(homepage)
+//...(cat ? { catSlug: cat } : { isFeatured: true }), if cat spread cat else featured

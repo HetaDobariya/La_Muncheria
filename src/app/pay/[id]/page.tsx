@@ -23,7 +23,7 @@ const PayPage = ({ params }: { params: { id: string } }) => {
             method: "POST",
           }
         );
-        const data = await res.json();
+        const data = await res.json(); //return clientsecret
         setClientSecret(data.clientSecret);
       } catch (err) {
         console.log(err);
@@ -42,11 +42,11 @@ const PayPage = ({ params }: { params: { id: string } }) => {
 
   return (
     <div>
-      {clientSecret && (
+      {clientSecret && ( //if clientsecret create form
         <Elements options={options} stripe={stripePromise}>
           <CheckoutForm />
         </Elements>
-      )}
+      )} 
     </div>
   );
 };

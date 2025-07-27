@@ -15,3 +15,6 @@ export const GET = async () => {
     );
   }
 };
+
+//not a page but an api route so next says to name it route.ts/route.js
+//JSON.stringify({ message: "Something went wrong!" }) - object not just a msg

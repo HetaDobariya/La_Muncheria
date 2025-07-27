@@ -1,5 +1,6 @@
 "use client";
 
+import Loading from "@/components/Loading";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -37,7 +38,7 @@ const AddPage = () => {
   const router = useRouter();
 
   if (status === "loading") {
-    return <p>Loading...</p>;
+    return <Loading />;
   }
 
   if (status === "unauthenticated" || !session?.user.isAdmin) {
@@ -66,13 +67,15 @@ const AddPage = () => {
   const upload = async () => {
     const data = new FormData();
     data.append("file", file!);
-    data.append("upload_preset", "restaurant");
+    data.append("upload_preset", "only_dhosa");
 
-    const res = await fetch("https://api.cloudinary.com/v1_1/lamadev/image", {
-      method: "POST",
-      headers: { "Content-Type": "multipart/form-data" },
-      body: data,
-    });
+    const res = await fetch(
+      "https://api.cloudinary.com/v1_1/dd24rshmw/image/upload",
+      {
+        method: "POST",
+        body: data,
+      }
+    );
 
     const resData = await res.json();
     return resData.url;
@@ -101,12 +104,12 @@ const AddPage = () => {
   };
 
   return (
-    <div className="p-4 lg:px-20 xl:px-40 h-[calc(100vh-6rem)] md:h-[calc(100vh-9rem)] flex items-center justify-center text-red-500">
-      <form onSubmit={handleSubmit} className="flex flex-wrap gap-6">
+    <div className="p-4 lg:px-20 xl:px-40 min-h-screen flex items-center justify-center text-blue-600">
+      <form onSubmit={handleSubmit} className="flex flex-wrap gap-6  w-full max-w-4xl">
+        <div className="w-full flex flex-col gap-2 max-w-md">
         <h1 className="text-4xl mb-2 text-gray-300 font-bold">
           Add New Product
         </h1>
-        <div className="w-full flex flex-col gap-2 ">
           <label
             className="text-sm cursor-pointer flex gap-4 items-center"
             htmlFor="file"
@@ -124,7 +127,7 @@ const AddPage = () => {
         <div className="w-full flex flex-col gap-2 ">
           <label className="text-sm">Title</label>
           <input
-            className="ring-1 ring-red-200 p-4 rounded-sm placeholder:text-red-200 outline-none"
+            className="ring-1 ring-blue-300 p-4 rounded-sm placeholder:text-red-200 outline-none"
             type="text"
             placeholder="Bella Napoli"
             name="title"
@@ -135,7 +138,7 @@ const AddPage = () => {
           <label className="text-sm">Description</label>
           <textarea
             rows={3}
-            className="ring-1 ring-red-200 p-4 rounded-sm placeholder:text-red-200 outline-none"
+            className="ring-1 ring-blue-300 p-4 rounded-sm placeholder:text-red-200 outline-none"
             placeholder="A timeless favorite with a twist, showcasing a thin crust topped with sweet tomatoes, fresh basil and creamy mozzarella."
             name="desc"
             onChange={handleChange}
@@ -144,7 +147,7 @@ const AddPage = () => {
         <div className="w-full flex flex-col gap-2 ">
           <label className="text-sm">Price</label>
           <input
-            className="ring-1 ring-red-200 p-4 rounded-sm placeholder:text-red-200 outline-none"
+            className="ring-1 ring-blue-300 p-4 rounded-sm placeholder:text-blue-300 outline-none"
             type="number"
             placeholder="29"
             name="price"
@@ -154,7 +157,7 @@ const AddPage = () => {
         <div className="w-full flex flex-col gap-2 ">
           <label className="text-sm">Category</label>
           <input
-            className="ring-1 ring-red-200 p-4 rounded-sm placeholder:text-red-200 outline-none"
+            className="ring-1 ring-blue-300 p-4 rounded-sm placeholder:text-blue-300 outline-none"
             type="text"
             placeholder="pizzas"
             name="catSlug"
@@ -163,16 +166,16 @@ const AddPage = () => {
         </div>
         <div className="w-full flex flex-col gap-2">
           <label className="text-sm">Options</label>
-          <div className="flex">
+          <div className="flex flex-wrap gap-2">
             <input
-              className="ring-1 ring-red-200 p-4 rounded-sm placeholder:text-red-200 outline-none"
+              className="ring-1 ring-blue-300 p-4 rounded-sm placeholder:text-blue-300 outline-none"
               type="text"
               placeholder="Title"
               name="title"
               onChange={changeOption}
             />
             <input
-              className="ring-1 ring-red-200 p-4 rounded-sm placeholder:text-red-200 outline-none"
+              className="ring-1 ring-blue-300 p-4 rounded-sm placeholder:text-blue-300 outline-none"
               type="number"
               placeholder="Additional Price"
               name="additionalPrice"
@@ -197,7 +200,7 @@ const AddPage = () => {
                 }
               >
                 <span>{opt.title}</span>
-                <span className="text-xs"> (+ ${opt.additionalPrice})</span>
+                <span className="text-xs"> (+ Rs.{opt.additionalPrice})</span>
               </div>
             ))}
           </div>

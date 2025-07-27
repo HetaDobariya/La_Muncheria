@@ -8,15 +8,16 @@ generator client {
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+  
 }
 
-model Account {
+model Account {  //acc,Session,user from auth.js/nextauth.js
   id                String  @id @default(cuid())
   userId            String
   type              String
   provider          String
   providerAccountId String
-  refresh_token     String? @db.Text
+  refresh_token     String? @db.Text   //acc ensures if u login through google and later through fb doesnt create new acc 
   access_token      String? @db.Text
   expires_at        Int?
   token_type        String?
@@ -87,7 +88,8 @@ model Order {
   price     Decimal
   products  Json[]
   status    String
-  intent_id String?  @unique
+  intent_id String?  @unique      //stripe id - payment , not required - ?
   user      User     @relation(fields: [userEmail], references: [email])
   userEmail String
 }
+

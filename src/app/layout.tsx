@@ -1,4 +1,4 @@
-import Notification from "@/components/Notification";
+import Notification from "@/components/Notification";//@-source folder not ..
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
@@ -12,8 +12,8 @@ import 'react-toastify/dist/ReactToastify.css';
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Lama Restaurant",
-  description: "Best food in town!",
+  title: "ONLY DHOSA",
+  description: "Best dosa in town!",
 };
 
 export default function RootLayout({

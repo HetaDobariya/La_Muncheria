@@ -15,10 +15,11 @@ export async function POST(
     },
   });
 
+  //if order create new intent useing stripe
   if (order) {
     const paymentIntent = await stripe.paymentIntents.create({
-      amount: order.price * 100,
-      currency: "usd",
+      amount: Number(order.price) * 100,
+      currency: "inr",
       automatic_payment_methods: {
         enabled: true,
       },
@@ -28,7 +29,7 @@ export async function POST(
       where: {
         id: orderId,
       },
-      data: { intent_id: paymentIntent.id },
+      data: { intent_id: paymentIntent.id }, //use this to create our checkout form
     });
 
     return new NextResponse(

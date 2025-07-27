@@ -33,7 +33,7 @@ export const GET = async (req: NextRequest) => {
   }
 };
 
-// CREATE ORDER
+// CREATE ORDER from the data u got on checkout
 export const POST = async (req: NextRequest) => {
   const session = await getAuthSession();
 
