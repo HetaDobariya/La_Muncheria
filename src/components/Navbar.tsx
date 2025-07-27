@@ -18,15 +18,7 @@ const Navbar = () => {
       </div>
       {/* LOGO */}
       <div className="flex-1 flex justify-center items-center">
-        <Link href="/">
-          <Image
-            src="/logo.png"
-            alt="Only Dhosa"
-            width={200}   // Adjust as needed
-            height={60}   // Adjust as needed
-            style={{ objectFit: "contain" }}
-            priority
-          />
+        <Link href="/" className="text-2xl font-bold text-blue-600">LA MUNCHERIA
         </Link>
       </div>
       {/* MOBILE MENU - if md device hide the hamburger*/}

@@ -12,7 +12,7 @@ import 'react-toastify/dist/ReactToastify.css';
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "ONLY DHOSA",
+  title: "LA MUNCHERIA",
   description: "Best dosa in town!",
 };
 
@@ -31,7 +31,7 @@ export default function RootLayout({
               <Navbar />
               {children}
               <Footer />
-              <ToastContainer position="bottom-right" theme="dark" autoClose={3000}/>
+              <ToastContainer position="bottom-right" theme="dark" autoClose={3000} />
             </div>
           </QueryProvider>
         </AuthProvider>

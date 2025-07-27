@@ -48,14 +48,20 @@ const AddPage = () => {
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    setInputs((prev) => {
-      return { ...prev, [e.target.name]: e.target.value };
-    });
+   const { name, value } = e.target;
+
+    setInputs((prev) => ({
+      ...prev,
+      [name]: name === "price" ? Number(value) : value,
+    }));
   };
   const changeOption = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setOption((prev) => {
-      return { ...prev, [e.target.name]: e.target.value };
-    });
+    const { name, value } = e.target;
+
+    setOption((prev) => ({
+      ...prev,
+      [name]: name === "additionalPrice" ? Number(value) : value,
+    }));
   };
 
   const handleChangeImg = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -107,9 +113,9 @@ const AddPage = () => {
     <div className="p-4 lg:px-20 xl:px-40 min-h-screen flex items-center justify-center text-blue-600">
       <form onSubmit={handleSubmit} className="flex flex-wrap gap-6  w-full max-w-4xl">
         <div className="w-full flex flex-col gap-2 max-w-md">
-        <h1 className="text-4xl mb-2 text-gray-300 font-bold">
-          Add New Product
-        </h1>
+          <h1 className="text-4xl mb-2 text-gray-300 font-bold">
+            Add New Product
+          </h1>
           <label
             className="text-sm cursor-pointer flex gap-4 items-center"
             htmlFor="file"
@@ -172,6 +178,7 @@ const AddPage = () => {
               type="text"
               placeholder="Title"
               name="title"
+              value={option.title}
               onChange={changeOption}
             />
             <input
@@ -179,11 +186,14 @@ const AddPage = () => {
               type="number"
               placeholder="Additional Price"
               name="additionalPrice"
+              value={option.additionalPrice}
               onChange={changeOption}
             />
-            <button
+            <button type="button"
               className="bg-gray-500 p-2 text-white"
-              onClick={() => setOptions((prev) => [...prev, option])}
+              onClick={() => {setOptions((prev) => [...prev, option]);
+                setOption({ title: "", additionalPrice: 0 });
+              }}
             >
               Add Option
             </button>

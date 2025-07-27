@@ -6,17 +6,17 @@ const data = [
   {
     id: 1,
     title: "always fresh & always crispy & always hot",
-    image: "/CAP_DOSA.jpg",
+    image: "/churros.jpg",
   },
   {
     id: 2,
     title: "we deliver your order wherever you are in Surat",
-    image: "/slide1.jpg",
+    image: "/veg_wrap.jpg",
   },
   {
     id: 3,
-    title: "the best dosa to share with your family",
-    image: "/JINI_ROLL.jpg",
+    title: "the best pasta to share with your family",
+    image: "/white_penne.jpg",
   },
 ];
 
