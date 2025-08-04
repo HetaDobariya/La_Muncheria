@@ -17,9 +17,9 @@ const getData = async () => {
 
 const getButtonText = (title: string) => {
   switch (title.toLowerCase()) {
-    case "plain dhosa":
+    case "pasta":
       return "Explore the Classics →";
-    case "fancy dhosa":
+    case "wraps and sandwiches":
       return "Get Fancy →";
     case "extras":
       return "Customize Your Plate →";

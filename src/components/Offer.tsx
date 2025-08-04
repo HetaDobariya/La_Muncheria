@@ -11,13 +11,13 @@ const Offer = () => {
 
       {/* TEXT CONTAINER */}
       <div className="w-full md:w-1/2 flex flex-col justify-center items-center md:items-start text-center md:text-left gap-6 z-10">
-        <h1 className="text-4xl md:text-5xl font-bold text-blue-600">Weekend Dosa Deal</h1>
+        <h1 className="text-4xl md:text-5xl font-bold text-blue-600">Weekend Deal</h1>
         <p className="text-gray-700 text-lg max-w-md">
-          Spice up your weekend with our crowd-favorite <strong>Mexican Paneer Wrap</strong>.
+          Spice up your weekend with our crowd-favorite <strong>Mexican Paneer Wrap</strong>and <strong>Vegetable wrap</strong>.
           Enjoy special discounts — this weekend only!
         </p>
         <button
-          onClick={() => router.push("/menu/plain-dhosa")}
+          onClick={() => router.push("/menu/wraps")}
           className="bg-blue-600 hover:bg-blue-700 transition text-white font-medium py-2 px-6 rounded-md shadow"
         >
           Order Now

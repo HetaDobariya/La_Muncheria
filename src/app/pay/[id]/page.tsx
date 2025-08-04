@@ -52,3 +52,4 @@ const PayPage = ({ params }: { params: { id: string } }) => {
 };
 
 export default PayPage;
+

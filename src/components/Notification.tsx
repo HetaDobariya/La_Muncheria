@@ -2,7 +2,7 @@ import React from 'react'
 
 const Notification = () => {
   return (
-    <div className='h-12 bg-blue-600 text-white px-4 flex items-center justify-center text-center text-sm md:text-base cursor-pointer'>Free delivery for all orders over Rs.500. Order your food now!
+    <div className='h-12 bg-blue-600 text-white px-4 flex items-center justify-center text-center text-sm md:text-base cursor-pointer'>Free delivery for all your orders. Order your food now!
     </div>
   )
 }

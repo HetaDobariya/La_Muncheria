@@ -70,7 +70,7 @@ const Menu = () => {
 
           {/* if not user-login else orders */}
           <Link
-            href={user ? "/orders" : "login"}
+            href={user ? "/orders" : "/login"}
             onClick={() => setOpen(false)}
           >
             {user ? "Orders" : "Login"}

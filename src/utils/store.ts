@@ -8,67 +8,67 @@ const INITIAL_STATE = {
   totalPrice: 0,
 };
 
-//like zustand first pass state then functions
 export const useCartStore = create(
   persist<CartType & ActionTypes>(
     (set, get) => ({
-      //state
       products: INITIAL_STATE.products,
       totalItems: INITIAL_STATE.totalItems,
       totalPrice: INITIAL_STATE.totalPrice,
-      //function
+
       addToCart(item) {
         const products = get().products;
         const productInState = products.find(
-          (product) => product.id === item.id
+          (product) =>
+            product.id === item.id &&
+            product.optionTitle === item.optionTitle
         );
 
         if (productInState) {
           const updatedProducts = products.map((product) =>
-            product.id === productInState.id
+            product.id === item.id &&
+            product.optionTitle === item.optionTitle
               ? {
-                  ...item,
-                  quantity: item.quantity + product.quantity,
-                  price: item.price,
-                  // price: item.price + product.price,
+                  ...product,
+                  quantity: product.quantity + item.quantity,
+                  price: product.price + item.price,
                 }
-              : item //simply return that item widout changing any other items
+              : product
           );
           set((state) => ({
             products: updatedProducts,
             totalItems: state.totalItems + item.quantity,
-            totalPrice: state.totalPrice + item.price * item.quantity,
+            totalPrice: state.totalPrice + item.price,
           }));
         } else {
           set((state) => ({
             products: [...state.products, item],
             totalItems: state.totalItems + item.quantity,
-            totalPrice: state.totalPrice + item.price * item.quantity,
+            totalPrice: state.totalPrice + item.price,
           }));
         }
       },
-      // removeFromCart(item) {
-      //   set((state) => ({
-      //     products: state.products.filter((product) => product.id !== item.id),
-      //     totalItems: state.totalItems - item.quantity,
-      //     totalPrice: state.totalPrice - item.price * item.quantity,
-      //   }));
-      // },
+
       removeFromCart(item) {
-  set((state) => {
-    const productToRemove = state.products.find(p => p.id === item.id);
+        set((state) => {
+          const productToRemove = state.products.find(
+            (p) =>
+              p.id === item.id &&
+              p.optionTitle === item.optionTitle
+          );
+          if (!productToRemove) return state;
+          const updatedProducts = state.products.filter(
+            (p) =>
+              !(p.id === item.id && p.optionTitle === item.optionTitle)
+          );
+          return {
+            products: updatedProducts,
+            totalItems: state.totalItems - productToRemove.quantity,
+            totalPrice: state.totalPrice - productToRemove.price,
+          };
+        });
+      },
 
-    if (!productToRemove) return state; // Item not found, no changes
-
-    const updatedProducts = state.products.filter(p => p.id !== item.id);
-
-    return {
-      products: updatedProducts,
-      totalItems: state.totalItems - productToRemove.quantity,
-      totalPrice: state.totalPrice - (productToRemove.price * productToRemove.quantity),
-    };
-  });
-},resetCart() {
+      resetCart() {
         set(INITIAL_STATE);
       },
     }),

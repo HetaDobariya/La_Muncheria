@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import React, { use, useEffect, useState } from "react";
+import {useRouter} from "next/navigation";
 
 const data = [
   {
@@ -33,6 +34,11 @@ const Slider = () => {
     return () => clearInterval(interval);
   }, []);
 
+  const router = useRouter()
+  const handleOrderNow = () => {
+    router.push("/menu"); // ← navigate to /menu
+  };
+
   return (
     <div className="flex flex-col h-[calc(100vh-6rem)] md:h-[calc(100vh-9rem)] lg:flex-row bg-fuchsia-50">
       {/* TEXT CONTAINER */}
@@ -40,7 +46,7 @@ const Slider = () => {
         <h1 className="text-5xl text-center uppercase p-4 md:p-10 md:text-6xl xl:text-7xl">
           {data[currentSlide].title}
         </h1>
-        <button className="bg-blue-600 text-white py-4 px-8">Order Now</button>
+        <button onClick={handleOrderNow} className="bg-blue-600 text-white py-4 px-8">Order Now</button>
       </div>
       {/* IMAGE CONTAINER */}
       <div className="w-full flex-1 relative">
